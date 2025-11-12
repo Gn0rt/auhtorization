@@ -26,7 +26,7 @@ namespace Authorization.Controllers
                 HttpContext.Session.SetString("Username", user.Username);
                 HttpContext.Session.SetString("Role", user.Role);
                 HttpContext.Session.SetInt32("UserId", user.Id);
-                Console.WriteLine($"🔑 {user.Username} đăng nhập thành công ({user.Role})");
+                Console.WriteLine($"{user.Username} đăng nhập thành công ({user.Role})");
                 if (user.Role == "Admin")
                 {
                     return RedirectToAction("Index", "Admin");
@@ -52,7 +52,7 @@ namespace Authorization.Controllers
 
             // Cookie auth dùng để xác thực [Authorize] trên controller/action
 
-            // Kết hợp cả 2 → logout hoàn toàn, tránh user vẫn còn quyền truy cập.
+            // Kết hợp cả 2 -> logout hoàn toàn, tránh user vẫn còn quyền truy cập.
         }
     }
 }
