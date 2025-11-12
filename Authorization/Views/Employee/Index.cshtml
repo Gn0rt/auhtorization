@@ -1,0 +1,92 @@
+@model Authorization.Data.User
+
+@{
+    ViewData["Title"] = "Employee Dashboard";
+}
+
+<style>
+    .nav {
+        background-color: darkgreen;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        gap: 20px;
+    }
+
+    .nav a {
+        color: white;
+        text-decoration: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+
+    .nav a.disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+
+    /* Submenu */
+    .sub-nav {
+        display: none;
+        list-style: none;
+        padding: 5px;
+        position: absolute;
+        background-color: darkslategray;
+        margin-top: 5px;
+        border-radius: 5px;
+    }
+
+    .item:hover .sub-nav {
+        display: block;
+    }
+
+    .sub-nav li a.disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+</style>
+
+<h1>Welcome, @Model.Username</h1>
+<div style="display:flex; justify-content:flex-end; margin-bottom:20px;">
+    <form method="get" action="/Auth/Logout">
+        <button type="submit" style="padding:5px 10px;">Đăng xuất</button>
+    </form>
+</div>
+<div class="nav">
+    <div class="item">
+        <a href="#" class="@(!Model.MainPermissions.Contains("quanli") ? "disabled" : "")">Quản lý</a>
+        <ul class="sub-nav">
+            <li>
+                <a href="#" class="@(!Model.SubPermissions.Contains("nhanvien") ? "disabled" : "")">Nhân viên</a>
+            </li>
+            <li>
+                <a href="#" class="@(!Model.SubPermissions.Contains("phongban") ? "disabled" : "")">Phòng ban</a>
+            </li>
+            <li>
+                <a href="#" class="@(!Model.SubPermissions.Contains("chucvu") ? "disabled" : "")">Chức vụ</a>
+            </li>
+        </ul>
+    </div>
+    <a href="#" class="@(!Model.MainPermissions.Contains("congcu") ? "disabled" : "")">Công cụ</a>
+    <a href="#" class="@(!Model.MainPermissions.Contains("giamsat") ? "disabled" : "")">Giám sát</a>
+    <a href="#" class="@(!Model.MainPermissions.Contains("baocao") ? "disabled" : "")">Báo cáo</a>
+</div>
+
+<h2>Sub Permissions:</h2>
+<ul>
+    <li class="@(!Model.SubPermissions.Contains("nhanvien") ? "disabled" : "")">QL Nhân viên</li>
+    <li class="@(!Model.SubPermissions.Contains("phongban") ? "disabled" : "")">QL Phòng ban</li>
+    <li class="@(!Model.SubPermissions.Contains("chucvu") ? "disabled" : "")">QL Chức vụ</li>
+</ul>
+
+@section Scripts {
+    <script>
+        document.querySelectorAll('.nav a.disabled').forEach(el => {
+            el.addEventListener('click', e => e.preventDefault());
+        });
+
+        document.querySelectorAll('.sub-nav li a.disabled').forEach(el => {
+            el.addEventListener('click', e => e.preventDefault());
+        });
+    </script>
+}

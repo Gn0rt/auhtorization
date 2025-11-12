@@ -1,0 +1,31 @@
+@{
+    ViewData["Title"] = "Đăng nhập";
+}
+
+<div style="max-width: 400px; margin: 80px auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px;">
+    <h2 style="text-align:center;">Đăng nhập</h2>
+
+    @if (ViewBag.Error != null)
+    {
+        <div style="color:red; margin-bottom:10px;">@ViewBag.Error</div>
+    }
+
+    <form method="post" action="/Auth/Login">
+        <div style="margin-bottom:15px;">
+            <label for="username">Tài khoản</label><br />
+            <input type="text" id="username" name="username" class="form-control" required
+                style="width:100%; padding:8px;" />
+        </div>
+
+        <div style="margin-bottom:15px;">
+            <label for="password">Mật khẩu</label><br />
+            <input type="password" id="password" name="password" class="form-control" required
+                style="width:100%; padding:8px;" />
+        </div>
+
+        <button type="submit"
+            style="width:100%; padding:10px; background-color:#007bff; color:white; border:none; border-radius:5px;">
+            Đăng nhập
+        </button>
+    </form>
+</div>

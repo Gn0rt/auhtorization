@@ -1,0 +1,66 @@
+@model List<Authorization.Data.User>
+
+@{
+    ViewData["Title"] = "Quản lý tài khoản";
+}
+
+<h1>Quản lý tài khoản</h1>
+<div style="display:flex; justify-content:flex-end; margin-bottom:20px;">
+    <form method="get" action="/Auth/Logout">
+        <button type="submit" style="padding:5px 10px;">Đăng xuất</button>
+    </form>
+</div>
+
+<table border="1" cellpadding="8" cellspacing="0" style="width:100%; border-collapse:collapse;">
+    <thead>
+        <tr>
+            <th>STT</th>
+            <th>Tài khoản</th>
+            <th>Chức vụ</th>
+            <th>Quyền chính</th>
+            <th>Quyền phụ</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            var user = Model[i];
+            <tr>
+                <td>@(i + 1)</td>
+                <td>@user.Username</td>
+                <td>@user.Role</td>
+                <td>
+                    <form method="post" action="/Admin/UpdatePermissions">
+                        <input type="hidden" name="userId" value="@user.Id" />
+                        <div>
+                            <label><input type="checkbox" name="mainPermissions" value="quanli"
+                                    @(user.MainPermissions.Contains("quanli") ? "checked" : "") /> Quản lý</label><br />
+                            <label><input type="checkbox" name="mainPermissions" value="giamsat"
+                                    @(user.MainPermissions.Contains("giamsat") ? "checked" : "") /> Giám sát</label><br />
+                            <label><input type="checkbox" name="mainPermissions" value="congcu"
+                                    @(user.MainPermissions.Contains("congcu") ? "checked" : "") /> Công cụ</label><br />
+                            <label><input type="checkbox" name="mainPermissions" value="baocao"
+                                    @(user.MainPermissions.Contains("baocao") ? "checked" : "") /> Báo cáo</label>
+                        </div>
+
+                <td>
+                    <div>
+                        <label><input type="checkbox" name="subPermissions" value="nhanvien"
+                                @(user.SubPermissions.Contains("nhanvien") ? "checked" : "") /> QL Nhân viên</label><br />
+                        <label><input type="checkbox" name="subPermissions" value="phongban"
+                                @(user.SubPermissions.Contains("phongban") ? "checked" : "") /> QL Phòng ban</label><br />
+                        <label><input type="checkbox" name="subPermissions" value="chucvu"
+                                @(user.SubPermissions.Contains("chucvu") ? "checked" : "") /> QL Chức vụ</label>
+                    </div>
+                </td>
+
+                <td>
+                    <button type="submit" style="padding:5px 10px;">Lưu</button>
+                </td>
+                </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
