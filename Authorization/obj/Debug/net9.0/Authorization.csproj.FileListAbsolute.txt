@@ -94,3 +94,4 @@
 /Users/pc/Study/Demo/demo_au/Authorization/obj/Debug/net9.0/compressed/51h64ldun2-3r8b2a0bt1.gz
 /Users/pc/Study/Demo/demo_au/Authorization/obj/Debug/net9.0/compressed/xnkmkrr0ji-9eepjztl9z.gz
 /Users/pc/Study/Demo/demo_au/Authorization/obj/Debug/net9.0/compressed/uew9yhzkpo-9eepjztl9z.gz
+/Users/pc/Study/Demo/demo_au/Authorization/obj/Debug/net9.0/Authorization.sourcelink.json
